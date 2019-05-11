@@ -10,6 +10,18 @@ def step_decay(epoch):
     lrate = initial_lrate * math.pow(drop, math.floor((1+epoch)/epochs_drop)) * (1.0 - momentum_schedule(epoch))
     return lrate
 
+def resnet_lr_schedule(epoch):
+    lr = 1e-3
+    if epoch > 180:
+        lr *= 0.5e-3
+    elif epoch > 160:
+        lr *= 1e-3
+    elif epoch > 120:
+        lr *= 1e-2
+    elif epoch > 80:
+        lr *= 1e-1
+    return lr
+    
 def momentum_schedule(epoch):
     initial_momentum = 0.5
     final_momentum   = 0.99
